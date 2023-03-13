@@ -5,15 +5,17 @@ import {
   Text,
   TouchableOpacity,
   View,
-  ViewProps,
 } from 'react-native';
 import {colors, size, WP} from '../../shared/exporter';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 interface Props {
   title: string;
   onButtonPress: () => void;
   buttonViewStyle?: StyleProp;
   txtStyle?: StyleProp;
+  withLinear?: boolean;
 }
 
 const AppButton: FC<Props> = ({
@@ -21,13 +23,26 @@ const AppButton: FC<Props> = ({
   onButtonPress,
   buttonViewStyle,
   txtStyle,
+  withLinear = false,
 }) => {
   return (
-    <TouchableOpacity
-      style={[styles.mainContainer, {...buttonViewStyle}]}
-      onPress={onButtonPress}>
-      <Text style={[styles.buttonTxt, {...txtStyle}]}>{title}</Text>
-    </TouchableOpacity>
+    <View>
+      {withLinear ? (
+        <TouchableOpacity onPress={onButtonPress}>
+          <LinearGradient
+            colors={['#ac334d', '#4b4ca0', '#3a55b2']}
+            style={[styles.mainContainer, {...buttonViewStyle}]}>
+            <Text style={[styles.buttonTxt, {...txtStyle}]}>{title}</Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={[styles.mainContainer, {...buttonViewStyle}]}
+          onPress={onButtonPress}>
+          <Text style={[styles.buttonTxt, {...txtStyle}]}>{title}</Text>
+        </TouchableOpacity>
+      )}
+    </View>
   );
 };
 
@@ -41,7 +56,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center',
     borderRadius: WP('10'),
-    marginTop: WP('80'),
   },
   buttonTxt: {
     fontSize: size.h6,

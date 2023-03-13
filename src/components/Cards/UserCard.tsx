@@ -24,7 +24,7 @@ const UserCard: FC<Props> = ({title, userImage, navigationScreen}) => {
     <TouchableOpacity
       onPress={() => {
         setSelect(!select);
-        navigation.replace(navigationScreen);
+        navigation.navigate(navigationScreen);
       }}>
       <View style={styles.mainContainer}>
         <Image source={userImage} style={styles.imageStyle} />

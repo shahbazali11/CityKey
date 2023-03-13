@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, View, ImageBackground, TouchableOpacity} from 'react-native';
 import {AppButton} from '../../../components';
-import {appImages} from '../../../shared/exporter';
+import {appImages, WP} from '../../../shared/exporter';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 
@@ -16,6 +16,9 @@ const Welcome = () => {
         title="GET STARTED"
         onButtonPress={() => {
           navigation.navigate('SignUp');
+        }}
+        buttonViewStyle={{
+          marginTop: WP('80'),
         }}
       />
       <TouchableOpacity
