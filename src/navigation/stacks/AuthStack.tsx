@@ -5,6 +5,7 @@ import SignUp from '../../screen/Auth/SignUp/SignUp';
 import Login from '../../screen/Auth/Login/Login';
 import Welcome from '../../screen/Auth/Welcome/Welcome';
 import RecoverPassword from '../../screen/Auth/RecoverPassword/RecoverPassword';
+import OTPVerification from '../../screen/Auth/OTPVerification/OTPVerification';
 
 type RootStackParamsList = {
   ContinueAs: undefined;
@@ -12,6 +13,7 @@ type RootStackParamsList = {
   Login: undefined;
   Welcome: undefined;
   RecoverPassword: undefined;
+  OTPVerification: undefined;
 };
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 
@@ -25,6 +27,7 @@ const AuthStack = () => {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Welcome" component={Welcome} />
       <Stack.Screen name="RecoverPassword" component={RecoverPassword} />
+      <Stack.Screen name="OTPVerification" component={OTPVerification} />
     </Stack.Navigator>
   );
 };

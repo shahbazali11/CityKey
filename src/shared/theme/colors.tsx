@@ -57,6 +57,7 @@ export const colors = {
   b2: '#312948',
   b3: '#464646',
   b4: '#222B45',
+  b5: '#1c1c1c',
 
   //gray shades
   g1: '#696969',

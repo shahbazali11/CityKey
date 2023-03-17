@@ -3,12 +3,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Splash from '../screen/Auth/Splash/Splash';
 import AuthStack from './stacks/AuthStack';
-import AdvertisingObjective from '../screen/App/AdvertisingObjective/AdvertisingObjective';
+import AdvertisingStack from './stacks/AdvertisingStack';
 
 type RootStackParamsList = {
   Splash: undefined;
   Auth: undefined;
-  AdvertisingObjective: undefined;
+  Advertising: undefined;
 };
 
 const AppStack = createNativeStackNavigator<RootStackParamsList>();
@@ -21,10 +21,7 @@ const MainNavigation = () => {
         screenOptions={{headerShown: false}}>
         <AppStack.Screen name="Splash" component={Splash} />
         <AppStack.Screen name="Auth" component={AuthStack} />
-        <AppStack.Screen
-          name="AdvertisingObjective"
-          component={AdvertisingObjective}
-        />
+        <AppStack.Screen name="Advertising" component={AdvertisingStack} />
       </AppStack.Navigator>
     </NavigationContainer>
   );

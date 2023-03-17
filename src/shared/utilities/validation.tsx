@@ -14,7 +14,11 @@ export const login = {
 };
 
 export const recover = {
-  email: '',
+  phone: '',
+};
+
+export const OTP = {
+  otp: '',
 };
 
 export const signupVS = yup.object().shape({
@@ -49,8 +53,12 @@ export const loginVS = yup.object().shape({
 });
 
 export const recoverVS = yup.object().shape({
-  email: yup
-    .string()
-    .required('Email Required')
-    .email('Please provide a valid email address'),
+  phone: yup
+    .number()
+    .typeError('Invalid contact number')
+    .required('Contact Number Required'),
+});
+
+export const OTPVS = yup.object().shape({
+  otp: yup.number().typeError('Invalid OTP number').required('OTP Required'),
 });

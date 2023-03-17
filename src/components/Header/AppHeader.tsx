@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   headerTxtStyle: {
     color: colors.white,
-    fontSize: size.xxlarge,
+    fontSize: size.large,
     fontWeight: 'bold',
   },
   rightStyle: {

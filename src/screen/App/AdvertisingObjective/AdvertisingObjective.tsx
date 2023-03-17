@@ -1,70 +1,14 @@
-import React, {FC} from 'react';
-import {Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import styles from './styles';
-import {AppHeader} from '../../../components';
+import {AdvertisingCard, AppButton, AppHeader} from '../../../components';
 import {useNavigation} from '@react-navigation/native';
-import AppIntroSlider from 'react-native-app-intro-slider';
-import {WP} from '../../../shared/exporter';
-
-const slides = [
-  {
-    key: 'one',
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
-    backgroundColor: '#59b2ab',
-  },
-  {
-    key: 'two',
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    backgroundColor: '#febe29',
-  },
-  {
-    key: 'three',
-    title: 'Rocket guy',
-    text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-    backgroundColor: '#22bcb5',
-  },
-  {
-    key: 'two',
-    title: 'Title 2',
-    text: 'Other cool stuff',
-    backgroundColor: '#febe29',
-  },
-  {
-    key: 'three',
-    title: 'Rocket guy',
-    text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
-    backgroundColor: '#22bcb5',
-  },
-];
+import {appImages, colors, WP} from '../../../shared/exporter';
 
 const AdvertisingObjective = () => {
   const navigation = useNavigation();
+  const [state, setState] = useState(0);
 
-  const renderSliderItem = () => {
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginTop: WP('5'),
-        }}>
-        {/* <View style={styles.activePaginationDots}>
-          <View style={styles.innerView}></View>
-        </View>
-        <View style={styles.paginationDots}></View>
-        <View style={styles.activePaginationDots}>
-          <View style={styles.innerView}></View>
-        </View>
-        <View style={styles.paginationDots}></View>
-        <View style={styles.activePaginationDots}>
-          <View style={styles.innerView}></View>
-        </View> */}
-      </View>
-    );
-  };
   return (
     <View style={styles.mainCotainer}>
       <AppHeader
@@ -77,12 +21,49 @@ const AdvertisingObjective = () => {
           navigation.navigate('Login');
         }}
       />
-      <AppIntroSlider
-        data={slides}
-        scrollEnabled={false}
-        renderItem={renderSliderItem}
-        activeDotStyle={styles.activePaginationDots}
-        dotStyle={styles.paginationDots}
+      <View style={styles.sliderContainer}>
+        <View
+          style={[styles.activePaginationDots, {backgroundColor: colors.red}]}>
+          <View style={styles.innerView}></View>
+        </View>
+        <View
+          style={[styles.paginationDots, {backgroundColor: colors.red}]}></View>
+        <View style={styles.activePaginationDots}>
+          <View style={styles.innerView}></View>
+        </View>
+        <View style={styles.paginationDots}></View>
+        <View style={styles.activePaginationDots}>
+          <View style={styles.innerView}></View>
+        </View>
+      </View>
+      <AdvertisingCard />
+      <View style={styles.linkContainer}>
+        <Image
+          source={appImages.windowWorld}
+          style={styles.worldImageStyle}
+          resizeMode="contain"
+        />
+        <View style={{marginLeft: WP('4')}}>
+          <Text style={styles.linkHeadingTxtStyle}>
+            Get More Website Traffic
+          </Text>
+          <TouchableOpacity>
+            <Text>https://citikey.com.au/</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+      <Text style={styles.noteTxtStyle}>
+        Note: The following objectives are supported in the desktop version
+        only: Reach, Video Views, App Installs, Conversions.
+      </Text>
+      <AppButton
+        withLinear
+        title="NEXT"
+        txtStyle={styles.buttonTxtStyle}
+        buttonViewStyle={styles.nextButtonStyle}
+        onButtonPress={() => {
+          navigation.navigate('UploadeImages');
+        }}
       />
     </View>
   );

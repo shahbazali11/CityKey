@@ -30,7 +30,7 @@ const Login = () => {
           {({values, errors, handleSubmit, handleChange}) => (
             <View>
               <AppInput
-                value={values.email}
+                value={values.phone}
                 placeholder={'Email Address'}
                 onChangeText={handleChange('email')}
               />
@@ -50,7 +50,9 @@ const Login = () => {
                 title="SIGN IN"
                 txtStyle={styles.buttonTxtStyle}
                 onButtonPress={() => {
-                  navigation.navigate('AdvertisingObjective');
+                  navigation.navigate('Advertising', {
+                    screen: 'AdvertisingObjective',
+                  });
                 }}
                 buttonViewStyle={styles.buttonContainer}
               />

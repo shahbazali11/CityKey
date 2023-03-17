@@ -10,4 +10,6 @@ export {
   loginVS,
   recover,
   recoverVS,
+  OTP,
+  OTPVS,
 } from './utilities/validation';
