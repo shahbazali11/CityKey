@@ -121,7 +121,55 @@ const styles = StyleSheet.create({
     marginTop: WP('8'),
     padding: WP('5'),
   },
-  featureCardStyle: {},
+  featureCardStyle: {
+    backgroundColor: 'red',
+    width: WP('80'),
+    height: WP('80'),
+    borderRadius: WP('4'),
+  },
+  roundView: {
+    width: WP('5'),
+    height: WP('5'),
+    borderRadius: WP('3'),
+    backgroundColor: colors.white,
+    marginTop: WP('-2.5'),
+  },
+  verticalLine: {
+    width: WP('1'),
+    height: WP('60'),
+    backgroundColor: colors.white,
+    marginVertical: WP('7.5'),
+    marginLeft: WP('2'),
+  },
+  priceView: {
+    width: WP('25'),
+    height: WP('75'),
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  priceTxt: {
+    color: colors.white,
+    fontSize: size.xtitle,
+    fontWeight: 'bold',
+  },
+  detailPriceTxt: {
+    color: '#ac7dab',
+    fontSize: size.tiny,
+  },
+  featuresView: {
+    width: WP('43'),
+    height: WP('75'),
+    alignSelf: 'center',
+    padding: WP('4'),
+    backgroundColor: 'yellow',
+  },
+  bullets: {
+    width: WP('2'),
+    height: WP('2'),
+    borderRadius: WP('1'),
+    backgroundColor: colors.white,
+  },
 });
 
 export default styles;

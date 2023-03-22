@@ -15,8 +15,10 @@ interface Props {
 const OTPVerification: React.FC<Props> = ({route}) => {
   const formikRef = useRef();
   const navigation = useNavigation();
+  const [resend, setResend] = useState(false);
 
   const {confirm} = route.params;
+  const {mobileNumber} = route.params;
   console.log('route', confirm);
 
   const onAuthStateChanged = (user: any) => {
@@ -28,15 +30,25 @@ const OTPVerification: React.FC<Props> = ({route}) => {
     return subscriber;
   }, []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setResend(true);
+    }, 60000);
+  }, []);
+
   const handleOTPVerification = async (values: any) => {
     try {
       const response = await confirm.confirm(values.otp);
       console.log('Response:', response);
-
       navigation.navigate('Login');
     } catch (error) {
       console.log('Invalid code.');
     }
+  };
+
+  const resendOTP = async () => {
+    const confirmation = await auth().signInWithPhoneNumber(mobileNumber, true);
+    console.log('Confirmation: ', confirmation);
   };
 
   return (
@@ -71,6 +83,13 @@ const OTPVerification: React.FC<Props> = ({route}) => {
                 withLinear
                 buttonViewStyle={styles.buttonContainer}
               />
+              {resend ? (
+                <TouchableOpacity onPress={resendOTP}>
+                  <Text>Resend</Text>
+                </TouchableOpacity>
+              ) : (
+                ''
+              )}
             </View>
           )}
         </Formik>

@@ -16,7 +16,10 @@ const RecoverPassword = () => {
     const mobileNumber = '+92' + values.phone;
     const confirmation = await auth().signInWithPhoneNumber(mobileNumber);
     console.log('Confirmation: ', confirmation);
-    navigation.navigate('OTPVerification', {confirm: confirmation});
+    navigation.navigate('OTPVerification', {
+      confirm: confirmation,
+      mobileNumber: mobileNumber,
+    });
   };
 
   return (

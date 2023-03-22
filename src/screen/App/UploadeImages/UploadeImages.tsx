@@ -6,9 +6,20 @@ import {useNavigation} from '@react-navigation/native';
 import {appImages, colors, size, WP} from '../../../shared/exporter';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Image} from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 
 const UploadeImages = () => {
   const navigation = useNavigation();
+
+  const renderListItems = item => {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <View style={styles.bullets}></View>
+        <Text>{item.list}</Text>
+      </View>
+    );
+  };
+
   const [data, setData] = useState([
     {
       id: 1,
@@ -35,6 +46,29 @@ const UploadeImages = () => {
       title: 'Pangle',
     },
   ]);
+
+  const featuresList = [
+    {
+      id: 1,
+      list: 'Change Icon in th corner to your business logo and have saved it on your phone.',
+    },
+    {
+      id: 2,
+      list: 'Editing Tools',
+    },
+    {
+      id: 3,
+      list: 'Change Background',
+    },
+    {
+      id: 4,
+      list: 'Add Music Effects',
+    },
+    {
+      id: 2,
+      list: 'Upload 20 videos to edit',
+    },
+  ];
 
   return (
     <ScrollView style={styles.mainContainer}>
@@ -135,7 +169,30 @@ const UploadeImages = () => {
           </View>
           <Icon name="chevron-forward-sharp" size={20} color={colors.black} />
         </TouchableOpacity>
-        <View style={styles.featureCardStyle}></View>
+        <LinearGradient
+          style={styles.featureCardStyle}
+          colors={['#cb322c', '#963359', '#614187']}>
+          <View style={{flexDirection: 'row'}}>
+            <View style={styles.priceView}>
+              <Text style={styles.priceTxt}>$30</Text>
+              <Text style={styles.detailPriceTxt}>Per Week</Text>
+            </View>
+            <View>
+              <View style={styles.roundView}></View>
+              <View style={styles.verticalLine}></View>
+              <View style={[styles.roundView, {marginTop: WP('0')}]}></View>
+            </View>
+            <View style={styles.featuresView}>
+              <Text>Features</Text>
+              <View>
+                <FlatList
+                  data={featuresList}
+                  renderItem={({item, index}) => renderListItems(item)}
+                />
+              </View>
+            </View>
+          </View>
+        </LinearGradient>
       </View>
     </ScrollView>
   );
