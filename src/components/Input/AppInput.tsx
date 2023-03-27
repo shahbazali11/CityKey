@@ -3,7 +3,7 @@ import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {colors, size, WP} from '../../shared/exporter';
 
 interface Props {
-  placeholder: string;
+  placeholder?: string;
   value: string;
   onChangeText: (txt: string) => void;
   secureTextEntry?: boolean;

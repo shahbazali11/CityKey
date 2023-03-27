@@ -158,17 +158,80 @@ const styles = StyleSheet.create({
     fontSize: size.tiny,
   },
   featuresView: {
-    width: WP('43'),
+    width: WP('48'),
     height: WP('75'),
     alignSelf: 'center',
-    padding: WP('4'),
-    backgroundColor: 'yellow',
   },
   bullets: {
     width: WP('2'),
     height: WP('2'),
     borderRadius: WP('1'),
     backgroundColor: colors.white,
+    marginTop: WP('1'),
+    marginRight: WP('2'),
+  },
+  featureTxtStyle: {
+    color: colors.white,
+    fontSize: size.xxtiny,
+  },
+  featureHeadingTxtStyle: {
+    color: colors.white,
+    fontSize: size.large,
+    marginBottom: WP('3'),
+    marginLeft: WP('4'),
+    fontWeight: 'bold',
+  },
+  imageReplaceContainer: {
+    width: WP('90'),
+    height: WP('40'),
+    backgroundColor: colors.white,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginTop: WP('8'),
+    borderRadius: WP('4'),
+    padding: WP('5'),
+  },
+  buttonTxtStyle: {
+    color: colors.white,
+    fontSize: size.large,
+  },
+  buttonStyle: {
+    width: WP('50'),
+    backgroundColor: colors.red,
+    borderRadius: WP('5'),
+    marginTop: WP('2'),
+    alignSelf: 'flex-start',
+  },
+  nextbuttonStyle: {
+    marginVertical: WP('5'),
+    paddingVertical: WP('4'),
+    width: WP('50'),
+  },
+  nextbuttonTxt: {
+    color: colors.white,
+    fontSize: size.large,
+  },
+  mainModalView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+  },
+  modalView: {
+    width: WP('90'),
+    borderRadius: WP('3'),
+    backgroundColor: colors.white,
+    padding: WP('5'),
+    elevation: 8,
+  },
+  modalButtonStyle: {
+    width: WP('38'),
+    backgroundColor: colors.g13,
+    marginTop: WP('3'),
+  },
+  cancelButtonTxtStyle: {
+    color: colors.g6,
+    fontSize: size.large,
   },
 });
 
