@@ -4,7 +4,7 @@ export {size} from './theme/sizes';
 export {HP, WP} from './theme/responsive';
 
 export {
-  signup,
+  signUp,
   signupVS,
   login,
   loginVS,

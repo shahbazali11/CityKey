@@ -1,17 +1,64 @@
 import React, {useRef} from 'react';
 import {Text, View, ImageBackground, TouchableOpacity} from 'react-native';
 import {AppButton, AppInput} from '../../../components';
-import {appImages, signup, signupVS} from '../../../shared/exporter';
+import {appImages, signUp, signupVS} from '../../../shared/exporter';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import {Formik} from 'formik';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {useAppSelector} from '../../../redux/store';
+import {signup} from '../../../redux/features/authSlice';
+import {useCreatePostMutation} from '../../../redux/api/postApi';
 
 const SignUp = () => {
   const navigation = useNavigation();
   const formikRef = useRef();
 
-  const handleSignup = (values: any) => {};
+  const [createPost, res] = useCreatePostMutation();
+  const {userInfo} = useAppSelector(state => state.authSlice);
+
+  const handleSignup = (values: any) => {
+    const url = 'http://192.168.11.35:4500/signup';
+    const data = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+      phone: values.phone,
+    };
+    console.log('Data: ', data);
+    //console.log('Signup Data: ', userInfo);
+
+    //createPost(data);
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+
+    // send the request
+    fetch(url, options)
+      .then(response => {
+        if (response.ok) {
+          // handle successful response
+          return response.json();
+        } else {
+          // handle error response
+          throw new Error('Failed to signup.');
+        }
+      })
+      .then(data => {
+        // handle response data
+        console.log(data);
+        navigation.navigate('Login');
+      })
+      .catch(error => {
+        // handle error
+        console.error(error);
+      });
+  };
 
   return (
     <ImageBackground style={styles.mainContainer} source={appImages.city}>
@@ -22,7 +69,7 @@ const SignUp = () => {
         </Text>
         <Formik
           innerRef={formikRef}
-          initialValues={signup}
+          initialValues={signUp}
           validationSchema={signupVS}
           onSubmit={values => {
             handleSignup(values);
@@ -57,9 +104,7 @@ const SignUp = () => {
               />
               <AppButton
                 title="SIGN UP"
-                onButtonPress={() => {
-                  navigation.navigate('Login');
-                }}
+                onButtonPress={handleSubmit}
                 withLinear
                 txtStyle={styles.buttonTxt}
                 buttonViewStyle={styles.buttonViewStyle}

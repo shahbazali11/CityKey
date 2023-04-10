@@ -4,9 +4,16 @@ import styles from './styles';
 import {AdvertisingCard, AppButton, AppHeader} from '../../../components';
 import {useNavigation} from '@react-navigation/native';
 import {appImages, colors, WP} from '../../../shared/exporter';
+import {RootStackParamsList} from '../../../navigation';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+
+type advertisingScreenProp = NativeStackNavigationProp<
+  RootStackParamsList,
+  'Advertising'
+>;
 
 const AdvertisingObjective = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<advertisingScreenProp>();
   const [state, setState] = useState(0);
 
   return (

@@ -5,7 +5,7 @@ import Splash from '../screen/Auth/Splash/Splash';
 import AuthStack from './stacks/AuthStack';
 import AdvertisingStack from './stacks/AdvertisingStack';
 
-type RootStackParamsList = {
+export type RootStackParamsList = {
   Splash: undefined;
   Auth: undefined;
   Advertising: undefined;

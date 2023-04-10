@@ -11,7 +11,43 @@ const Login = () => {
   const navigation = useNavigation();
   const formikRef = useRef();
 
-  const handleSignup = (values: any) => {};
+  const handleSignup = (values: any) => {
+    const url = 'http://192.168.11.35:4500/login';
+    const data = {
+      email: values.email,
+      password: values.password,
+    };
+    console.log('Data: ', data);
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    };
+
+    // send the request
+    fetch(url, options)
+      .then(response => {
+        if (response.ok) {
+          // handle successful response
+          return response.json();
+        } else {
+          // handle error response
+          throw new Error('Failed to signup.');
+        }
+      })
+      .then(data => {
+        // handle response data
+        console.log(data);
+        navigation.navigate('Advertising');
+      })
+      .catch(error => {
+        // handle error
+        console.error(error);
+      });
+  };
 
   return (
     <ImageBackground style={styles.mainContainer} source={appImages.city}>
@@ -49,11 +85,7 @@ const Login = () => {
               <AppButton
                 title="SIGN IN"
                 txtStyle={styles.buttonTxtStyle}
-                onButtonPress={() => {
-                  navigation.navigate('Advertising', {
-                    screen: 'AdvertisingObjective',
-                  });
-                }}
+                onButtonPress={handleSubmit}
                 buttonViewStyle={styles.buttonContainer}
               />
               <TouchableOpacity

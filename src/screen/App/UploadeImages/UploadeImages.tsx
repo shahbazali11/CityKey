@@ -1,21 +1,44 @@
 import React, {useState} from 'react';
-import {Text, TouchableOpacity, View, ScrollView, FlatList} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  ScrollView,
+  FlatList,
+  Image,
+  Modal,
+  TextInput,
+} from 'react-native';
 import styles from './styles';
-import {AppHeader, CircleView, WellDoneCard} from '../../../components';
+import {
+  AppButton,
+  AppHeader,
+  AppInput,
+  CircleView,
+  WellDoneCard,
+} from '../../../components';
 import {useNavigation} from '@react-navigation/native';
 import {appImages, colors, size, WP} from '../../../shared/exporter';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Image} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const UploadeImages = () => {
   const navigation = useNavigation();
+  const [modalDisplayName, setModalDisplayName] = useState(false);
+  const [modalAdText, setModalAdText] = useState(false);
+  const [name, setName] = useState('');
 
-  const renderListItems = item => {
+  const renderListItems = (item: any) => {
     return (
-      <View style={{flexDirection: 'row'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          paddingVertical: WP('1'),
+          marginHorizontal: WP('4'),
+        }}>
         <View style={styles.bullets}></View>
-        <Text>{item.list}</Text>
+        <Text style={styles.featureTxtStyle}>{item.list}</Text>
       </View>
     );
   };
@@ -50,7 +73,7 @@ const UploadeImages = () => {
   const featuresList = [
     {
       id: 1,
-      list: 'Change Icon in th corner to your business logo and have saved it on your phone.',
+      list: 'Change Icon in th corner to \n\n your business logo and have \n\n saved it on your phone.',
     },
     {
       id: 2,
@@ -65,13 +88,13 @@ const UploadeImages = () => {
       list: 'Add Music Effects',
     },
     {
-      id: 2,
+      id: 5,
       list: 'Upload 20 videos to edit',
     },
   ];
 
   return (
-    <ScrollView style={styles.mainContainer}>
+    <ScrollView style={styles.mainContainer} keyboardShouldPersistTaps="always">
       <AppHeader
         headerTitle="Advertising Objective"
         onBackPress={() => {
@@ -100,7 +123,55 @@ const UploadeImages = () => {
       </View>
       <WellDoneCard />
       <View style={styles.displayContainer}>
-        <TouchableOpacity style={styles.individualContainerStyle}>
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalDisplayName}
+          onRequestClose={() => setModalDisplayName(!modalDisplayName)}>
+          <View style={styles.mainModalView}>
+            <View style={styles.modalView}>
+              <View style={styles.innerContainer}>
+                <Text style={styles.headerTxt}>Display Name</Text>
+                <Text style={styles.detailTxt}>Enter Your Display Name</Text>
+              </View>
+              <TextInput
+                value={name}
+                onChangeText={txt => setName(txt)}
+                style={{
+                  borderWidth: WP('0.5'),
+                  borderRadius: WP('2'),
+                  height: WP('30'),
+                  borderColor: colors.g13,
+                }}
+                textAlignVertical={'top'}
+                multiline
+                numberOfLines={3}
+              />
+              <View
+                style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                <AppButton
+                  title="Cancel"
+                  onButtonPress={() => {
+                    setName('');
+                    setModalDisplayName(!modalDisplayName);
+                  }}
+                  buttonViewStyle={styles.modalButtonStyle}
+                  txtStyle={styles.cancelButtonTxtStyle}
+                />
+                <AppButton
+                  title="Submit"
+                  onButtonPress={() => setModalDisplayName(!modalDisplayName)}
+                  withLinear
+                  buttonViewStyle={styles.modalButtonStyle}
+                  txtStyle={styles.buttonTxtStyle}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+        <TouchableOpacity
+          style={styles.individualContainerStyle}
+          onPress={() => setModalDisplayName(!modalDisplayName)}>
           <View style={styles.innerContainer}>
             <Text style={styles.headerTxt}>Display Name</Text>
             <Text style={styles.detailTxt}>Citiykey Directory</Text>
@@ -110,7 +181,84 @@ const UploadeImages = () => {
           </TouchableOpacity>
         </TouchableOpacity>
         <View style={{height: 1, backgroundColor: colors.g11}}></View>
-        <TouchableOpacity style={styles.individualContainerStyle}>
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalAdText}
+          onRequestClose={() => setModalAdText(!modalAdText)}>
+          <View style={styles.mainModalView}>
+            <View
+              style={[
+                styles.modalView,
+                {width: WP('70'), padding: WP('3'), height: WP(50)},
+              ]}>
+              <View
+                style={[
+                  styles.innerContainer,
+                  {height: WP('10'), justifyContent: 'flex-start'},
+                ]}>
+                <Text
+                  style={[
+                    styles.headerTxt,
+                    {fontWeight: '500', color: colors.g12},
+                  ]}>
+                  Ad Text
+                </Text>
+                <TouchableOpacity style={styles.downlodButton}>
+                  <FontAwesome
+                    name="cloud-download"
+                    size={25}
+                    color={colors.white}
+                  />
+                  <Text> DownLoad Now</Text>
+                </TouchableOpacity>
+                <View style={styles.likeShireConitainer}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="heart" size={15} color={colors.g4} />
+                    <Text> Like</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <FontAwesome name="comment" size={15} color={colors.g4} />
+                    <Text> Comment</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon
+                      name="share-social-sharp"
+                      size={15}
+                      color={colors.g4}
+                    />
+                    <Text> Share</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <AppButton
+                  title="Cancel"
+                  onButtonPress={() => {
+                    setModalAdText(!modalAdText);
+                  }}
+                  buttonViewStyle={styles.modalButtonStyle}
+                  txtStyle={styles.cancelButtonTxtStyle}
+                />
+                <AppButton
+                  title="Submit"
+                  onButtonPress={() => setModalAdText(!modalAdText)}
+                  withLinear
+                  buttonViewStyle={styles.modalButtonStyle}
+                  txtStyle={styles.buttonTxtStyle}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+        <TouchableOpacity
+          style={styles.individualContainerStyle}
+          onPress={() => setModalAdText(!modalAdText)}>
           <View style={styles.innerContainer}>
             <Text style={styles.headerTxt}>Ad Text</Text>
             <Text style={styles.detailTxt}>
@@ -183,7 +331,16 @@ const UploadeImages = () => {
               <View style={[styles.roundView, {marginTop: WP('0')}]}></View>
             </View>
             <View style={styles.featuresView}>
-              <Text>Features</Text>
+              <Icon
+                name="lock-closed"
+                size={23}
+                style={{
+                  alignSelf: 'flex-end',
+                  justifyContent: 'flex-start',
+                  color: '#e1b6c2',
+                }}
+              />
+              <Text style={styles.featureHeadingTxtStyle}>Features</Text>
               <View>
                 <FlatList
                   data={featuresList}
@@ -194,6 +351,23 @@ const UploadeImages = () => {
           </View>
         </LinearGradient>
       </View>
+      <View style={styles.imageReplaceContainer}>
+        <Text style={styles.headerTxt}>Profile Image</Text>
+        <Text style={styles.detailTxt}>Atleast 128*128</Text>
+        <AppButton
+          title="Replace"
+          onButtonPress={() => {}}
+          txtStyle={styles.buttonTxtStyle}
+          buttonViewStyle={styles.buttonStyle}
+        />
+      </View>
+      <AppButton
+        title="NEXT"
+        withLinear
+        onButtonPress={() => {}}
+        buttonViewStyle={styles.nextbuttonStyle}
+        txtStyle={styles.nextbuttonTxt}
+      />
     </ScrollView>
   );
 };
