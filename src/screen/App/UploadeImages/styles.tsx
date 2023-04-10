@@ -233,6 +233,22 @@ const styles = StyleSheet.create({
     color: colors.g6,
     fontSize: size.large,
   },
+  downlodButton: {
+    backgroundColor: colors.red,
+    flexDirection: 'row',
+    width: WP('64'),
+    padding: WP('3'),
+    borderRadius: WP('2'),
+    alignItems: 'center',
+    height: WP('15'),
+  },
+  likeShireConitainer: {
+    marginTop: WP('2'),
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    width: WP('64'),
+  },
 });
 
 export default styles;

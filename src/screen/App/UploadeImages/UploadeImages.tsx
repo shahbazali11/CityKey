@@ -21,10 +21,12 @@ import {useNavigation} from '@react-navigation/native';
 import {appImages, colors, size, WP} from '../../../shared/exporter';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const UploadeImages = () => {
   const navigation = useNavigation();
   const [modalDisplayName, setModalDisplayName] = useState(false);
+  const [modalAdText, setModalAdText] = useState(false);
   const [name, setName] = useState('');
 
   const renderListItems = (item: any) => {
@@ -92,7 +94,7 @@ const UploadeImages = () => {
   ];
 
   return (
-    <ScrollView style={styles.mainContainer}>
+    <ScrollView style={styles.mainContainer} keyboardShouldPersistTaps="always">
       <AppHeader
         headerTitle="Advertising Objective"
         onBackPress={() => {
@@ -179,7 +181,84 @@ const UploadeImages = () => {
           </TouchableOpacity>
         </TouchableOpacity>
         <View style={{height: 1, backgroundColor: colors.g11}}></View>
-        <TouchableOpacity style={styles.individualContainerStyle}>
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalAdText}
+          onRequestClose={() => setModalAdText(!modalAdText)}>
+          <View style={styles.mainModalView}>
+            <View
+              style={[
+                styles.modalView,
+                {width: WP('70'), padding: WP('3'), height: WP(50)},
+              ]}>
+              <View
+                style={[
+                  styles.innerContainer,
+                  {height: WP('10'), justifyContent: 'flex-start'},
+                ]}>
+                <Text
+                  style={[
+                    styles.headerTxt,
+                    {fontWeight: '500', color: colors.g12},
+                  ]}>
+                  Ad Text
+                </Text>
+                <TouchableOpacity style={styles.downlodButton}>
+                  <FontAwesome
+                    name="cloud-download"
+                    size={25}
+                    color={colors.white}
+                  />
+                  <Text> DownLoad Now</Text>
+                </TouchableOpacity>
+                <View style={styles.likeShireConitainer}>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon name="heart" size={15} color={colors.g4} />
+                    <Text> Like</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <FontAwesome name="comment" size={15} color={colors.g4} />
+                    <Text> Comment</Text>
+                  </View>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Icon
+                      name="share-social-sharp"
+                      size={15}
+                      color={colors.g4}
+                    />
+                    <Text> Share</Text>
+                  </View>
+                </View>
+              </View>
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                }}>
+                <AppButton
+                  title="Cancel"
+                  onButtonPress={() => {
+                    setModalAdText(!modalAdText);
+                  }}
+                  buttonViewStyle={styles.modalButtonStyle}
+                  txtStyle={styles.cancelButtonTxtStyle}
+                />
+                <AppButton
+                  title="Submit"
+                  onButtonPress={() => setModalAdText(!modalAdText)}
+                  withLinear
+                  buttonViewStyle={styles.modalButtonStyle}
+                  txtStyle={styles.buttonTxtStyle}
+                />
+              </View>
+            </View>
+          </View>
+        </Modal>
+        <TouchableOpacity
+          style={styles.individualContainerStyle}
+          onPress={() => setModalAdText(!modalAdText)}>
           <View style={styles.innerContainer}>
             <Text style={styles.headerTxt}>Ad Text</Text>
             <Text style={styles.detailTxt}>
